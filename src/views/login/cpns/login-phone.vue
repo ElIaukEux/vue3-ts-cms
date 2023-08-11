@@ -13,11 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue"
+import { reactive } from 'vue'
 
 const phoneInfo = reactive({
-  phone: "",
-  code: ""
+  phone: '',
+  code: ''
 })
 </script>
 

@@ -1,7 +1,7 @@
-import { App } from "vue"
+import { App } from 'vue'
 
-import "element-plus/theme-chalk/base.css"
-import "element-plus/dist/index.css"
+import 'element-plus/theme-chalk/base.css'
+import 'element-plus/dist/index.css'
 import {
   ElButton,
   ElTabs,
@@ -11,8 +11,16 @@ import {
   ElInput,
   ElFormItem,
   ElCheckbox,
-  ElLink
-} from "element-plus"
+  ElLink,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItem,
+  ElContainer,
+  ElHeader,
+  ElFooter,
+  ElMain,
+  ElAside
+} from 'element-plus'
 
 const components = [
   ElButton,
@@ -23,7 +31,15 @@ const components = [
   ElInput,
   ElFormItem,
   ElCheckbox,
-  ElLink
+  ElLink,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItem,
+  ElContainer,
+  ElHeader,
+  ElFooter,
+  ElMain,
+  ElAside
 ]
 
 export default function (app: App): void {

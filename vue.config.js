@@ -6,6 +6,19 @@ const path = require("path")
 module.exports = defineConfig({
   // 方式1：vueCli提供的属性
   transpileDependencies: true,
+  devServer: {
+    port: 80,
+    open: true,
+    proxy: {
+      "^/dev-api": {
+        target: "http://vue.ruoyi.vip/prod-api/",
+        pathRewrite: {
+          "^/dev-api": ""
+        },
+        changeOrigin: true
+      }
+    }
+  },
   // 方式2：和webpack属性完全一致，最后会合并
   configureWebpack: {
     resolve: {

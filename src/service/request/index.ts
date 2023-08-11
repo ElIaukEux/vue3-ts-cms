@@ -1,9 +1,9 @@
-import axios from "axios"
-import type { AxiosInstance } from "axios"
-import type { MYRequestConfig, MyRequestInterceptors } from "./type"
+import axios from 'axios'
+import type { AxiosInstance } from 'axios'
+import type { MYRequestConfig, MyRequestInterceptors } from './type'
 
-import { ElLoading } from "element-plus"
-import type { LoadingInstance } from "element-plus/lib/components/loading/src/loading"
+import { ElLoading, ElMessage } from 'element-plus'
+import type { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
 
 const DEFAULT_LOADING = true
 
@@ -30,13 +30,12 @@ class MyRequest {
       // 所有都有的拦截器
       this.instance.interceptors.request.use(
         (config) => {
-          console.log("所有请求的拦截器")
+          // console.log("所有请求的拦截器")
           if (this.isShowLoading) {
-            console.log("竟然进来了")
             this.loading = ElLoading.service({
               lock: true,
-              text: "正在请求数据....",
-              background: "rgba(0, 0, 0, 0.1)",
+              text: '正在请求数据....',
+              background: 'rgba(0, 0, 0, 0.1)',
               fullscreen: true
             })
           }
@@ -48,16 +47,29 @@ class MyRequest {
       )
     this.instance.interceptors.response.use(
       (res) => {
-        console.log("所有响应的拦截器")
+        console.log('所有响应的拦截器', res)
         this.loading?.close()
         this.isShowLoading = DEFAULT_LOADING
+        // return res
+        if (res.data.code === 500) {
+          ElMessage({
+            message: res.data.msg,
+            type: 'error'
+          })
+        }
+        if (res.data.code === 401) {
+          ElMessage({
+            message: res.data.msg,
+            type: 'error'
+          })
+        }
         return res.data
       },
       (err) => {
         this.loading?.close()
         this.isShowLoading = DEFAULT_LOADING
         console.log(err)
-        return err
+        // return err
       }
     )
   }
@@ -65,7 +77,7 @@ class MyRequest {
   request<T = any>(config: MYRequestConfig<T>) {
     return new Promise<T>((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
-        console.log("单独请求的请求拦截")
+        // console.log("单独请求的请求拦截")
         config = config.interceptors.requestInterceptor(config)
       }
 
@@ -79,7 +91,7 @@ class MyRequest {
         .request<any, T>(config)
         .then((res) => {
           if (config.interceptors?.responseInterceptor) {
-            console.log("单独请求的响应拦截")
+            // console.log("单独请求的响应拦截")
             res = config.interceptors.responseInterceptor(res)
           }
           // console.log(res.data)
@@ -89,6 +101,22 @@ class MyRequest {
           reject(err)
         })
     })
+  }
+
+  get<T = any>(config: MYRequestConfig<T>) {
+    return this.request<T>({ ...config, method: 'GET' })
+  }
+
+  post<T = any>(config: MYRequestConfig<T>) {
+    return this.request<T>({ ...config, method: 'POST' })
+  }
+
+  delete<T = any>(config: MYRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'DELETE' })
+  }
+
+  patch<T = any>(config: MYRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'PATCH' })
   }
 }
 

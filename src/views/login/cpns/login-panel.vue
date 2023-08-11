@@ -38,14 +38,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue"
-import type { TabsPaneContext } from "element-plus"
-import { UserFilled, Iphone } from "@element-plus/icons-vue"
+import { ref } from 'vue'
+import type { TabsPaneContext } from 'element-plus'
+import { UserFilled, Iphone } from '@element-plus/icons-vue'
 
-import LoginAccount from "./login-account.vue"
-import LoginPhone from "./login-phone.vue"
+import LoginAccount from './login-account.vue'
+import LoginPhone from './login-phone.vue'
 
-const activeName = ref("account")
+const activeName = ref('account')
 const accountRef = ref<InstanceType<typeof LoginAccount>>()
 console.log(accountRef.value)
 
@@ -55,7 +55,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 
 const isKeepPassword = ref(true)
 const SubmitEvent = () => {
-  if (activeName.value === "account") {
+  if (activeName.value === 'account') {
     accountRef.value?.loginAction()
   }
 }
@@ -64,7 +64,7 @@ const SubmitEvent = () => {
 <style lang="less" scoped>
 .login-panel {
   margin-bottom: 100px;
-  width: 350px;
+  width: 430px;
   text-align: center;
 
   .title {
