@@ -1,5 +1,5 @@
-const { defineConfig } = require("@vue/cli-service")
-const path = require("path")
+const { defineConfig } = require('@vue/cli-service')
+const path = require('path')
 // const AutoImport = require("unplugin-auto-import/webpack")
 // const Components = require("unplugin-vue-components/webpack")
 // const { ElementPlusResolver } = require("unplugin-vue-components/resolvers")
@@ -10,10 +10,10 @@ module.exports = defineConfig({
     port: 80,
     open: true,
     proxy: {
-      "^/dev-api": {
-        target: "http://vue.ruoyi.vip/prod-api/",
+      '^/dev-api': {
+        target: 'http://vue.ruoyi.vip/prod-api/',
         pathRewrite: {
-          "^/dev-api": ""
+          '^/dev-api': ''
         },
         changeOrigin: true
       }
@@ -23,7 +23,7 @@ module.exports = defineConfig({
   configureWebpack: {
     resolve: {
       alias: {
-        components: "@/components"
+        components: '@/components'
       }
     }
     // plugins: [

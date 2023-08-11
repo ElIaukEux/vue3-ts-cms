@@ -2,9 +2,9 @@ module.exports = {
   // 按需引入element样式
   plugins: [
     [
-      "import",
+      'import',
       {
-        libraryName: "element-plus/lib/components",
+        libraryName: 'element-plus/lib/components',
         // customStyleName: (name) => {
         //   return `element-plus/theme-chalk/${name}.css`
         // },
@@ -15,5 +15,5 @@ module.exports = {
       }
     ]
   ],
-  presets: ["@vue/cli-plugin-babel/preset"]
+  presets: ['@vue/cli-plugin-babel/preset']
 }
