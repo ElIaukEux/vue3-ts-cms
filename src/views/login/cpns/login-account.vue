@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { Key, UserFilled, Lock } from '@element-plus/icons-vue'
-import { computed, onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { rules } from '../config/account-config'
 import { FormInstance } from 'element-plus'
 import { accountCaptchaImg } from '@/service/login/login'
@@ -42,10 +42,6 @@ onMounted(() => {
 })
 
 const store = useStore()
-
-const test = computed(() => store.state.name)
-
-console.log(test.value)
 
 const accountInfo = reactive({
   username: '',
@@ -66,7 +62,6 @@ const loginAction = (): void => {
           ...accountInfo
         })
         .then((res) => {
-          console.log(res, '这个是啥----500')
           if (res && res.code === 500) {
             captchBtn()
           }

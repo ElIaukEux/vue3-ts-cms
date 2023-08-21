@@ -47,7 +47,7 @@ class MyRequest {
       )
     this.instance.interceptors.response.use(
       (res) => {
-        console.log('所有响应的拦截器', res)
+        // console.log('所有响应的拦截器', res)
         this.loading?.close()
         this.isShowLoading = DEFAULT_LOADING
         // return res

@@ -3,6 +3,7 @@ import type { ILoginState } from './type'
 import type { IRootState } from '../type'
 import type { IAccountType } from '@/service/login/type'
 import LocalCatch from '@/utils/catch'
+import makeRoute from '@/utils/makeRoute'
 import router from '@/router'
 import {
   accountLogin,
@@ -27,9 +28,14 @@ const loginModule: Module<ILoginState, IRootState> = {
       state.userInfo = userInfo
     },
     changeUserMenus(state, userMenus: any) {
-      console.log(userMenus, '这里是啥---')
-
       state.userMenus = userMenus
+
+      const makeRouteList = makeRoute(userMenus)
+
+      makeRouteList.forEach((item) => {
+        router.addRoute('main', item)
+      })
+      console.log(makeRouteList, 'zhegeliebiao----0890', router)
     }
   },
   actions: {

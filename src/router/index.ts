@@ -13,7 +13,27 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/main',
-    component: () => import('@/views/main/main.vue')
+    name: 'main',
+    component: () => import('@/views/main/main.vue'),
+    children: [
+      {
+        name: 'system',
+        path: '/system',
+        component: () => import('@/views/main/system/user/index.vue'),
+        children: [
+          {
+            name: 'User',
+            path: 'user',
+            component: () => import('@/views/main/system/user/index.vue')
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/notFount/not-found.vue')
   }
 ]
 
@@ -23,13 +43,14 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
+  console.log(to, '这是啥-----909')
+
   if (to.path !== '/login') {
     const token = localCatch.getCache('token')
     if (!token) {
       return '/login'
     }
   }
-  console.log(to.path === '/login')
 })
 
 export default router
