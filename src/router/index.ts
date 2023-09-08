@@ -14,21 +14,8 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/main',
     name: 'main',
-    component: () => import('@/views/main/main.vue'),
-    children: [
-      {
-        name: 'system',
-        path: '/system',
-        component: () => import('@/views/main/system/user/index.vue'),
-        children: [
-          {
-            name: 'User',
-            path: 'user',
-            component: () => import('@/views/main/system/user/index.vue')
-          }
-        ]
-      }
-    ]
+    redirect: '/main/system',
+    component: () => import('@/views/main/main.vue')
   },
   {
     path: '/:pathMatch(.*)*',
@@ -43,7 +30,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  console.log(to, '这是啥-----909')
+  console.log(to, router.getRoutes(), '这是啥-----909')
 
   if (to.path !== '/login') {
     const token = localCatch.getCache('token')

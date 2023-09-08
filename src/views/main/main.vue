@@ -6,9 +6,9 @@
         <nav-menu :collapse="isFold"></nav-menu>
       </el-aside>
       <el-container class="page-contain">
-        <el-header
-          ><nav-header @foldChange="foldChange"></nav-header
-        ></el-header>
+        <el-header>
+          <nav-header @foldChange="foldChange"></nav-header>
+        </el-header>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -36,6 +36,9 @@ const foldChange = (palyLoad: boolean) => {
   top: 0;
   height: 100%;
   width: 100%;
+}
+.el-header {
+  background-color: #fff;
 }
 .main-contain,
 .page-contain {

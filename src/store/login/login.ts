@@ -35,14 +35,14 @@ const loginModule: Module<ILoginState, IRootState> = {
       makeRouteList.forEach((item) => {
         router.addRoute('main', item)
       })
-      console.log(makeRouteList, 'zhegeliebiao----0890', router)
+      // console.log(makeRouteList, 'zhegeliebiao----0890', router)
     }
   },
   actions: {
     async acccountLoginActions({ commit }, payload: IAccountType) {
       // 用户登录
       const res = await accountLogin(payload)
-      console.log(res)
+      // console.log(res)
       if (res.code === 500) {
         return res
       } else {

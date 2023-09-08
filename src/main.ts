@@ -10,9 +10,9 @@ import './assets/css/index.less'
 
 const app = createApp(App)
 app.use(globalRegister) //按需注册全局element组件
+setupStore()
 app.use(router)
 app.use(store)
-setupStore()
 app.mount('#app')
 
 // 测试代码

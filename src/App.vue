@@ -16,5 +16,6 @@ export default defineComponent({
 <style lang="less">
 .App {
   height: 100%;
+  background-color: #ccc;
 }
 </style>
