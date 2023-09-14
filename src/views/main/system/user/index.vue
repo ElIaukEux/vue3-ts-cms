@@ -1,9 +1,21 @@
 <template>
   <div class="user">
-    <h2>user</h2>
+    <div class="user-search">
+      <my-form v-bind="userSearch"></my-form>
+    </div>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import MyForm from '@/base-ui/form'
+import { userSearch } from './config'
+</script>
 
-<style scoped></style>
+<style scoped lang="less">
+.user {
+  .user-search {
+  }
+}
+</style>
+
+<style></style>

@@ -30,7 +30,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  console.log(to, router.getRoutes(), '这是啥-----909')
+  // console.log(to, router.getRoutes(), '这是啥-----909')
 
   if (to.path !== '/login') {
     const token = localCatch.getCache('token')

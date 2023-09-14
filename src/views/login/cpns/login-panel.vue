@@ -47,7 +47,7 @@ import LoginPhone from './login-phone.vue'
 
 const activeName = ref('account')
 const accountRef = ref<InstanceType<typeof LoginAccount>>()
-console.log(accountRef.value)
+// console.log(accountRef.value)
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)

@@ -10,18 +10,18 @@
       active-text-color="#0099ff"
       background-color="#304156"
       class="el-menu-vertical-demo"
-      default-active="2"
+      :default-active="defaultActive"
       text-color="#fff"
     >
       <template v-for="(item, index) in userMenus" :key="index">
         <template v-if="item.children">
-          <el-sub-menu :index="item.path">
+          <el-sub-menu :index="item.name">
             <template #title>
               <el-icon><component :is="item.meta.icon"></component></el-icon>
               <span>{{ item.meta.title }}</span>
             </template>
             <el-menu-item
-              :index="menuItem.path"
+              :index="menuItem.name"
               v-for="(menuItem, index) in item.children"
               :key="index"
               @click="handleMenuItemClick(menuItem)"
@@ -30,7 +30,7 @@
           </el-sub-menu>
         </template>
         <template v-else>
-          <el-menu-item :index="item.path" class="el-else-item"
+          <el-menu-item :index="item.name" class="el-else-item"
             ><template #title>
               <el-icon><component :is="item.meta.icon"></component></el-icon>
               <span>{{ item.meta.title }}</span>
@@ -44,8 +44,10 @@
 
 <script setup lang="ts">
 import router from '@/router'
+import { useRoute } from 'vue-router'
 import { useStore } from '@/store'
-import { toRefs } from 'vue'
+import { pathMapToMenu } from '@/utils/makeRoute'
+import { toRefs, ref } from 'vue'
 
 const props = defineProps({
   collapse: Boolean
@@ -53,11 +55,14 @@ const props = defineProps({
 const { collapse } = toRefs(props)
 
 const store = useStore()
+const route = useRoute()
 const userMenus = store.state.login.userMenus
-// console.log(userMenus)
+const currentPath = route.path
+const defaultActive = ref('')
+
+defaultActive.value = pathMapToMenu(userMenus, currentPath).name
 
 const handleMenuItemClick = (item: any) => {
-  console.log(item, item.name, 'zhezhezhe2222')
   router.push({
     name: item.name
   })
@@ -65,6 +70,7 @@ const handleMenuItemClick = (item: any) => {
   //   path: '/main/system/user'
   // })
 }
+// console.log(firstName, currentPath, 'zhezhezhe2222')
 </script>
 
 <style scoped lang="less">
